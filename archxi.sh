@@ -1,5 +1,5 @@
 #!/bin/bash
-#set -e
+set -e
 #
 ##########################################################
 #                 Arch-XFCE script                       #
@@ -36,7 +36,6 @@ w='\E[37m'
 endc='\E[0m'
 enda='\033[0m'
 version="20191014"
-spath="$( cd "$( dirname $0 )" && pwd )"
 
 # ArchXI Logo
 function showlogo {
@@ -607,6 +606,14 @@ fc-cache -fv ~/.fonts
 
 echo -e " [${g}✔${endc}]::[${b}Fonts For Conkies(AUR)${enda}]: Installed!"
 echo
-sleep 1
+sleep 5
+clear
+echo -e "${g}"
+echo -e "**************************************************************"
+echo -e "*                                                            *"
+echo -e "*                 Installation Complete!                     *"
+echo -e "*         Restart Computer For Changes To Take Effect        *"
+echo -e "*                                                            *"
+echo -e "**************************************************************${endc}"
 
 done
