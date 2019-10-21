@@ -167,7 +167,7 @@ function addkeyservers {
 }
 
 # Add Trust Key
-function trustkey {
+function addtrustkey {
  echo -e " ${b}[!]::[please wait]: Receiving, local signing and refreshing keys...${enda}"
 
  sudo pacman-key -r 74F5DE85A506BF64
