@@ -4,14 +4,14 @@ set -e
 ##########################################################
 #                 Arch-XFCE script                       #
 #  ArchLinux Applications Automatic Installation Script  #
-#  Inspired From                                         #
+#  Inspired and Forked From                              #
 #  https://github.com/SofianeHamlaoui/ArchI0             #
 #  And                                                   #
 #  https://github.com/arcolinuxd/arco-xfce               #
 ##########################################################
 #  +FIRST  : sudo chmod +x archxi.sh                     #
 #                (Give EXEC Access To Script)            #
-#  +TO RUN    : sudo ./arcxi.sh                          #
+#  +TO RUN    : ./arcxi.sh                               #
 ##########################################################
 #                                                        #
 #                DO NOT JUST RUN THIS.                   #
@@ -35,7 +35,7 @@ c='\E[36m'
 w='\E[37m'
 endc='\E[0m'
 enda='\033[0m'
-version="20191014"
+version="20191021"
 
 # ArchXI Logo
 function showlogo {
@@ -62,25 +62,10 @@ function showlogo {
   read input
 }
 
-#ROOT User Check
-function checkroot {
-  if [[ $(id -u) = 0 ]]; then
-    echo -e " Checking For ROOT: ${g}PASSED${endc}"
-  else
-    echo -e " Checking For ROOT: ${r}FAILED${endc}
- ${y}This Script Needs To Run As ROOT${endc}"
-    echo -e " ${b}archxi.sh${enda} Will Now Exit"
-    echo
-    sleep 5
-    exit
-  fi
-  echo
-}
-
 # Initial pacman -Syu
 function initpacmanupd {
   echo 
-  echo -e "${b} Updating ..... ${enda}${r} | Please stop any install process before updating${endc}"
+  echo -e "${b} Updating ..... ${enda}"
   echo
   sudo pacman -Syyu --noconfirm
   echo "Update Completed" 
@@ -146,13 +131,17 @@ echo -e " [${r}x${endc}]::[${b}warning${enda}]:this script requires Wget"
 echo && echo -e " ${b}[!]::[please wait]: Installing Wget ..${enda}"
 sudo pacman -S --noconfirm wget
 sleep 2
-echo ""
+echo 
 fi
 sleep 5
 } 
 
 #Add Key Servers
 function addkeyservers {
+
+ echo -e " ${b}[!]::[please wait]:  Adding keyservers to personal .gpg for future applications...${enda}"
+ echo
+
  [ -d $HOME"/.gnupg" ] || mkdir -p $HOME"/.gnupg"
 
  echo '
@@ -160,17 +149,19 @@ function addkeyservers {
  keyserver hkps://hkps.pool.sks-keyservers.net:443
  keyserver hkp://ipv4.pool.sks-keyservers.net:11371' | tee --append ~/.gnupg/gpg.conf
 
- sudo chmod 600 ~/.gnupg/gpg.conf
- sudo chmod 700 ~/.gnupg
+ chmod 600 ~/.gnupg/gpg.conf
+ chmod 700 ~/.gnupg
 
  echo -e " ${b}[!]::[please wait]:  Adding keyservers to the /etc/pacman.d/gnupg folder for the use with pacman...${enda}"
+ echo
 
  echo '
  keyserver hkp://pool.sks-keyservers.net:80
  keyserver hkps://hkps.pool.sks-keyservers.net:443
- keyserver hkp://ipv4.pool.sks-keyservers.net:11371' | tee --append /etc/pacman.d/gnupg/gpg.conf
+ keyserver hkp://ipv4.pool.sks-keyservers.net:11371' | sudo tee --append /etc/pacman.d/gnupg/gpg.conf
 
  echo -e " [${g}✔${endc}]::[${b}Keyservers${enda}] Added"
+ echo
  sleep 5
 }
 
@@ -190,7 +181,6 @@ function trustkey {
 function arcolinuxrepos {
  echo -e " ${b}[!]::[please wait]:  Getting the Latest Arcolunux Mirrors File...${enda}"
 
- sudo pacman -S wget --noconfirm --needed
  sudo wget https://raw.githubusercontent.com/arcolinux/arcolinux-mirrorlist/master/etc/pacman.d/arcolinux-mirrorlist -O /etc/pacman.d/arcolinux-mirrorlist
 
 
@@ -206,11 +196,10 @@ function arcolinuxrepos {
  Include = /etc/pacman.d/arcolinux-mirrorlist
  [arcolinux_repo_submicron]
  SigLevel = Required DatabaseOptional
- Include = /etc/pacman.d/arcolinux-mirrorlist' | tee --append /etc/pacman.conf
+ Include = /etc/pacman.d/arcolinux-mirrorlist' | sudo tee --append /etc/pacman.conf
 
  sudo pacman -Syy
 
- echo -e " ${b}[!]::[please wait]:  Installing the Offical Mirrorlist File Now...${enda}"
  echo "Installing the official mirrorlist file now."
 
  sudo pacman -S arcolinux-mirrorlist-git --noconfirm
@@ -233,11 +222,20 @@ function aurinstall {
 		fi
 	fi
 }
-showlogo && initpacmanupd && checkyay  && checktrizen && checkgit && checkwget
-addkeyservers && addtrustkey && aroclinuxrepos && initpacmanupd
+showlogo
+initpacmanupd
+checkyay
+checktrizen
+checkgit
+checkwget
+addkeyservers
+addtrustkey
+aroclinuxrepos
+initpacmanupd
 
 # Install software used in .bashrc
 echo -e " ${b}[!]::[please wait]:  Installing Software used in .bashrc...${enda}"
+echo
 sudo pacman -S --noconfirm --needed expac hwinfo reflector youtube-dl
 echo -e " [${g}✔${endc}]::[${b}.bashrc Software${enda}]: Installed!"
 echo
@@ -245,7 +243,7 @@ sleep 5
 
 # Install Display Manager and Desktop
 echo -e " ${b}[!]::[please wait]:  Installing Display Manager and XFCE Desktop...${enda}"
-sudo pacman -Syyu --noconfirm
+echo
 #installing displaymanager or login manager
 sudo pacman -S --noconfirm --needed lightdm arcolinux-lightdm-gtk-greeter arcolinux-lightdm-gtk-greeter-settings arcolinux-wallpapers-git  
 #installing desktop environment
@@ -261,6 +259,7 @@ sleep 5
 
 # Install Sound Software
 echo -e " ${b}[!]::[please wait]:  Installing Display Sound Software...${enda}"
+echo
 sudo pacman -S --noconfirm --needed pulseaudio pulseaudio-alsa pavucontrol alsa-utils alsa-plugins alsa-lib alsa-firmware
 sudo pacman -S --noconfirm --needed gstreamer gst-plugins-good gst-plugins-bad gst-plugins-base gst-plugins-ugly
 sudo pacman -S --noconfirm --needed volumeicon playerctl
@@ -270,6 +269,7 @@ sleep 5
 
 # Install Printer Management
 echo -e " ${b}[!]::[please wait]:  Installing Print Management Software...${enda}"
+echo
 sudo pacman -S --noconfirm --needed cups cups-pdf ghostscript gsfonts gutenprint gtk3-print-backends libcups hplip system-config-printer
 sudo systemctl enable org.cups.cupsd.service
 echo -e " [${g}✔${endc}]::[${b}Print Management Software${enda}]: Installed!"
@@ -278,6 +278,7 @@ sleep 5
 
 # Install Samba
 echo -e " ${b}[!]::[please wait]:  Installing Samba...${enda}"
+echo
 sudo pacman -S --noconfirm --needed samba
 sudo wget "https://git.samba.org/samba.git/?p=samba.git;a=blob_plain;f=examples/smb.conf.default;hb=HEAD" -O /etc/samba/smb.conf.original
 #sudo wget "https://raw.githubusercontent.com/arcolinux/arcolinux-system-config/master/etc/samba/smb.conf.arcolinux" -O /etc/samba/smb.conf.arcolinux
@@ -300,6 +301,7 @@ sleep 5
 echo -e " ${b}Installing Software From Standard Arch Linux Repositories${enda}"
 echo
 echo -e " ${b}[!]::[please wait]:  Installing Accessories Category...${enda}"
+echo
 sudo pacman -S --noconfirm --needed catfish cmatrix galculator gnome-screenshot plank xfburn variety
 echo -e " [${g}✔${endc}]::[${b}Accessories Category${enda}]: Installed!"
 echo
@@ -309,33 +311,40 @@ sudo pacman -S --noconfirm --needed atom geany meld
 echo -e " [${g}✔${endc}]::[${b}Accessories Category${enda}]: Installed!"
 echo
 echo -e " ${b}[!]::[please wait]:  Installing Games Category...${enda}"
+echo
 sudo pacman -S --noconfirm --needed kmines steam-native-runtime steam supertuxkart wesnoth
 echo -e " [${g}✔${endc}]::[${b}Games Category${enda}]: Installed!"
 echo
 echo -e " ${b}[!]::[please wait]:  Installing Graphics Category...${enda}"
+echo
 sudo pacman -S --noconfirm --needed gimp gnome-font-viewer gpick inkscape nomacs ristretto
 echo -e " [${g}✔${endc}]::[${b}Graphics Category${enda}]: Installed!"
 echo
 echo -e " ${b}[!]::[please wait]:  Installing Internet Category...${enda}"
+echo
 sudo pacman -S --noconfirm --needed firefox hexchat qbittorrent telegram-desktop
 echo -e " [${g}✔${endc}]::[${b}Internet Category${enda}]: Installed!"
 echo
 echo -e " ${b}[!]::[please wait]:  Installing Multimedia Category...${enda}"
+echo
 sudo pacman -S --noconfirm --needed pragha simplescreenrecorder vlc
 echo -e " [${g}✔${endc}]::[${b}Multimedia Category${enda}]: Installed!"
 echo
 echo -e " ${b}[!]::[please wait]:  Installing Offce Category...${enda}"
+echo
 sudo pacman -S --noconfirm --needed evince libreoffice-fresh thunderbird
 echo -e " [${g}✔${endc}]::[${b}Office Category${enda}]: Installed!"
 echo
 echo -e " ${b}[!]::[please wait]:  Installing System Category...${enda}"
+echo
 sudo pacman -S --noconfirm --needed arc-gtk-theme accountsservice baobab curl dconf-editor dmenu dmidecode ffmpegthumbnailer git glances gnome-disk-utility gnome-keyring
 sudo pacman -S --noconfirm --needed gparted grsync gtk-engine-murrine gvfs gvfs-mtp hardinfo hddtemp htop imagemagick kvantum-qt5 kvantum-theme-arc lm_sensors lsb-release mlocate
 sudo pacman -S --noconfirm --needed net-tools noto-fonts numlockx polkit-gnome qt5ct rxvt-unicode sane screenfetch scrot simple-scan sysstat termite thunar thunar-archive-plugin thunar-volman
-sudo pacman -S --noconfirm --needed ttf-ubuntu-font-family ttf-droid tumbler vnstat wget wmctrl unclutter urxvt-perls w3m xclip xdg-user-dirs xfce4-notifyd zenity
+sudo pacman -S --noconfirm --needed ttf-ubuntu-font-family ttf-droid tumbler vnstat wmctrl unclutter urxvt-perls w3m xclip xdg-user-dirs xfce4-notifyd zenity
 echo -e " [${g}✔${endc}]::[${b}System Category${enda}]: Installed!"
 echo
 echo -e " ${b}[!]::[please wait]:  Installing Zippers and Unzippers...${enda}"
+echo
 sudo pacman -S --noconfirm --needed unace unrar zip unzip sharutils  uudeview  arj cabextract file-roller
 echo -e " [${g}✔${endc}]::[${b}Zippers and Unzippers${enda}]: Installed!"
 echo
@@ -347,6 +356,10 @@ sleep 5
 echo -e " ${b}Installing Software From Arch User Repositories (AUR)${enda}"
 echo
 echo -e " ${b}[!]::[please wait]:  Installing Accessories Category...${enda}"
+echo
+
+package="bitwarden-bin"
+aurinstall
 
 package="conky-lua-archers"
 aurinstall
@@ -363,20 +376,16 @@ aurinstall
 echo -e " [${g}✔${endc}]::[${b}Accessories Category${enda}]: Installed!"
 echo
 echo -e " ${b}[!]::[please wait]:  Installing Development Category...${enda}"
+echo
 
 package="sublime-text-dev"
 aurinstall
 
 echo -e " [${g}✔${endc}]::[${b}Development Category${enda}]: Installed!"
 echo
-echo -e " ${b}[!]::[please wait]:  Installing Internet Category...${enda}"
 
-package="bitwarden-bin"
-aurinstall
-
-echo -e " [${g}✔${endc}]::[${b}Internet Category${enda}]: Installed!"
-echo
 echo -e " ${b}[!]::[please wait]:  Installing Multimedia Category...${enda}"
+echo
 
 package="gradio"
 aurinstall
@@ -440,6 +449,7 @@ aurinstall
 echo -e " [${g}✔${endc}]::[${b}Multimedia Category${enda}]: Installed!"
 echo
 echo -e " ${b}[!]::[please wait]:  Installing System Category...${enda}"
+echo
 
 package="downgrade"
 aurinstall
@@ -550,6 +560,7 @@ aurinstall
 echo -e " [${g}✔${endc}]::[${b}System Category${enda}]: Installed!"
 echo
 echo -e " ${b}[!]::[please wait]:  Installing Hardcode-Fixer...${enda}"
+echo
 
 package="hardcode-fixer-git"
 aurinstall
@@ -562,7 +573,7 @@ echo -e " ${b}Installing Software From ArcoLinux Repositories${enda}"
 sudo pacman -S --noconfirm --needed arcolinux-applications-git arcolinux-arc-themes-nico-git arcolinux-bin-git arcolinux-config-git
 sudo pacman -S --noconfirm --needed arcolinux-conky-collection-git arcolinux-faces-git arcolinux-fonts-git arcolinux-geany-git arcolinux-kvantum-git
 sudo pacman -S --noconfirm --needed arcolinux-lightdm-gtk-greeter arcolinux-lightdm-gtk-greeter-settings arcolinux-local-git arcolinux-mirrorlist-git
-sudo pacman -S --noconfirm --needed arcolinux-neofetch-git arcolinux-nitrogen-git arcolinux-pipemenus-git arcolinux-plank-git arcolinux-plank-themes-git
+sudo pacman -S --noconfirm --needed arcolinux-nitrogen-git arcolinux-pipemenus-git arcolinux-plank-git arcolinux-plank-themes-git
 sudo pacman -S --noconfirm --needed arcolinux-qt5-git arcolinux-rofi-git arcolinux-rofi-themes-git arcolinux-root-git arcolinux-slim
 sudo pacman -S --noconfirm --needed arcolinux-slimlock-themes-git arcolinux-system-config-git arcolinux-termite-themes-git arcolinux-variety-git arcolinux-wallpapers-git
 sudo pacman -S --noconfirm --needed arcolinux-xfce4-panel-profiles-git arcolinux-xfce-thunar-git
@@ -574,11 +585,13 @@ echo
 sudo cp -rT /etc/skel ~
 
 echo -e " ${b}Removing All Unnecessary Folders and Files From .config${enda}"
+echo
 
 sudo rm -rf ~/.config/volumeicon
 
 sleep 5
 echo -e " ${b}Installing Fonts From Arch Linux Repositories${enda}"
+echo
 
 sudo pacman -S --noconfirm --needed adobe-source-sans-pro-fonts cantarell-fonts noto-fonts terminus-font ttf-bitstream-vera ttf-dejavu ttf-droid 
 sudo pacman -S --noconfirm --needed ttf-inconsolata ttf-liberation ttf-roboto ttf-ubuntu-font-family tamsyn-font
@@ -588,6 +601,7 @@ echo
 sleep 5
 
 echo -e " ${b}Installing Fonts For Conkies${enda}"
+echo
 
 [ -d $HOME"/.fonts" ] || mkdir -p $HOME"/.fonts"
 
@@ -610,4 +624,3 @@ echo -e "*                 Installation Complete!                     *"
 echo -e "*         Restart Computer For Changes To Take Effect        *"
 echo -e "*                                                            *"
 echo -e "**************************************************************${endc}"
-done
