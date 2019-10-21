@@ -2,6 +2,7 @@
 set -e
 #
 ##########################################################
+#                                                        #
 #                 Arch-XFCE script                       #
 #  ArchLinux Applications Automatic Installation Script  #
 #  Inspired and Forked From                              #
