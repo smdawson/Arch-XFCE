@@ -174,6 +174,13 @@ function trustkey {
  sudo pacman-key --refresh-keys
 
  echo -e " [${g}✔${endc}]::[${b}Key Trusted${enda}] "
+ echo
+ sudo pacman-key -r 9C2AB05E7E437F06
+ sudo pacman-key --lsign-key 9C2AB05E7E437F06
+ sudo pacman-key --refresh-keys
+
+ echo -e " [${g}✔${endc}]::[${b}Key Trusted${enda}] "
+ echo
  sleep 5
 }
 
@@ -337,7 +344,7 @@ echo -e " [${g}✔${endc}]::[${b}Office Category${enda}]: Installed!"
 echo
 echo -e " ${b}[!]::[please wait]:  Installing System Category...${enda}"
 echo
-sudo pacman -S --noconfirm --needed arc-gtk-theme accountsservice baobab curl dconf-editor dmenu dmidecode ffmpegthumbnailer git glances gnome-disk-utility gnome-keyring
+sudo pacman -S --noconfirm --needed arc-gtk-theme accountsservice baobab curl dconf-editor dmenu dmidecode ffmpegthumbnailer git glances gnome-disk-utility gnome-keyring gnupg
 sudo pacman -S --noconfirm --needed gparted grsync gtk-engine-murrine gvfs gvfs-mtp hardinfo hddtemp htop imagemagick kvantum-qt5 kvantum-theme-arc lm_sensors lsb-release mlocate
 sudo pacman -S --noconfirm --needed net-tools noto-fonts numlockx polkit-gnome qt5ct rxvt-unicode sane screenfetch scrot simple-scan sysstat termite thunar thunar-archive-plugin thunar-volman
 sudo pacman -S --noconfirm --needed ttf-ubuntu-font-family ttf-droid tumbler vnstat wmctrl unclutter urxvt-perls w3m xclip xdg-user-dirs xfce4-notifyd zenity
