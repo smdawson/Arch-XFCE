@@ -167,7 +167,7 @@ function addkeyservers {
 }
 
 # Add Trust Key
-function addtrustkey {
+function addtrustkeyarco {
  echo -e " ${b}[!]::[please wait]: Receiving, local signing and refreshing keys...${enda}"
 
  sudo pacman-key -r 74F5DE85A506BF64
@@ -176,12 +176,14 @@ function addtrustkey {
 
  echo -e " [${g}✔${endc}]::[${b}Key Trusted${enda}] "
  echo
+}
+ function addtrustkeyseth {
  sudo pacman-key -r 9C2AB05E7E437F06
  sudo pacman-key --lsign-key 9C2AB05E7E437F06
  sudo pacman-key --refresh-keys
 
- echo -e " [${g}✔${endc}]::[${b}Key Trusted${enda}] "
- echo
+ #echo -e " [${g}✔${endc}]::[${b}Key Trusted${enda}] "
+ #echo
  sleep 5
 }
 
@@ -237,8 +239,9 @@ checktrizen
 checkgit
 checkwget
 addkeyservers
-addtrustkey
-aroclinuxrepos
+addtrustkeyarco
+addtrustkeyseth
+arcolinuxrepos
 initpacmanupd
 
 # Install software used in .bashrc
