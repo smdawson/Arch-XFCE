@@ -20,6 +20,8 @@ set -e
 #                                                        #
 ##########################################################
 #
+#  TO DO - FIX CONKY
+#
 # Variables
 # b=bold u=underline bl=black r=red g=green
 # y=yellow bu=blue m=magenta c=cyan w=white
@@ -172,7 +174,7 @@ function addtrustkeyarco {
 
  sudo pacman-key -r 74F5DE85A506BF64
  sudo pacman-key --lsign-key 74F5DE85A506BF64
- #sudo pacman-key --refresh-keys
+ sudo pacman-key --refresh-keys
 
  echo -e " [${g}✔${endc}]::[${b}Key Trusted${enda}] "
  echo
@@ -180,10 +182,10 @@ function addtrustkeyarco {
  function addtrustkeyseth {
  sudo pacman-key -r 9C2AB05E7E437F06
  sudo pacman-key --lsign-key 9C2AB05E7E437F06
- #sudo pacman-key --refresh-keys
+ sudo pacman-key --refresh-keys
 
- #echo -e " [${g}✔${endc}]::[${b}Key Trusted${enda}] "
- #echo
+ echo -e " [${g}✔${endc}]::[${b}Key Trusted${enda}] "
+ echo
  sleep 5
 }
 
@@ -233,17 +235,9 @@ function aurinstall {
 	fi
 }
 showlogo
-initpacmanupd
-checkyay
-checktrizen
-checkgit
-checkwget
-addkeyservers
-addtrustkeyarco
-addtrustkeyseth
-sudo pacman-key --refresh-keys
-arcolinuxrepos
-initpacmanupd
+initpacmanupd && checkyay && checktrizen && checkgit && checkwget && addkeyservers && addtrustkeyarco && addtrustkeyseth
+
+arcolinuxrepos && initpacmanupd
 
 # Install software used in .bashrc
 echo -e " ${b}[!]::[please wait]:  Installing Software used in .bashrc...${enda}"
@@ -373,8 +367,8 @@ echo
 package="bitwarden-bin"
 aurinstall
 
-package="conky-lua-archers"
-aurinstall
+#package="conky-lua-archers"
+#aurinstall
 
 package="cool-retro-term"
 aurinstall
