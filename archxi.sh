@@ -172,7 +172,7 @@ function addtrustkeyarco {
 
  sudo pacman-key -r 74F5DE85A506BF64
  sudo pacman-key --lsign-key 74F5DE85A506BF64
- sudo pacman-key --refresh-keys
+ #sudo pacman-key --refresh-keys
 
  echo -e " [${g}✔${endc}]::[${b}Key Trusted${enda}] "
  echo
@@ -180,7 +180,7 @@ function addtrustkeyarco {
  function addtrustkeyseth {
  sudo pacman-key -r 9C2AB05E7E437F06
  sudo pacman-key --lsign-key 9C2AB05E7E437F06
- sudo pacman-key --refresh-keys
+ #sudo pacman-key --refresh-keys
 
  #echo -e " [${g}✔${endc}]::[${b}Key Trusted${enda}] "
  #echo
@@ -241,6 +241,7 @@ checkwget
 addkeyservers
 addtrustkeyarco
 addtrustkeyseth
+sudo pacman-key --refresh-keys
 arcolinuxrepos
 initpacmanupd
 
