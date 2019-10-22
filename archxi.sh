@@ -20,7 +20,7 @@ set -e
 #                                                        #
 ##########################################################
 #
-#  TO DO - FIX CONKY
+#  TO DO - FIX CONKY, Fix Trust Keys
 #
 # Variables
 # b=bold u=underline bl=black r=red g=green
@@ -235,7 +235,7 @@ function aurinstall {
 	fi
 }
 showlogo
-initpacmanupd && checkyay && checktrizen && checkgit && checkwget && addkeyservers && addtrustkeyarco && addtrustkeyseth
+initpacmanupd && checkyay && checktrizen && checkgit && checkwget && addkeyservers
 
 arcolinuxrepos && initpacmanupd
 
