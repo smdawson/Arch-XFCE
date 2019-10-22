@@ -235,9 +235,7 @@ function aurinstall {
 	fi
 }
 showlogo
-initpacmanupd && checkyay && checktrizen && checkgit && checkwget && addkeyservers
-
-arcolinuxrepos && initpacmanupd
+initpacmanupd && checkyay && checktrizen && checkgit && checkwget && addkeyservers && arcolinuxrepos && initpacmanupd
 
 # Install software used in .bashrc
 echo -e " ${b}[!]::[please wait]:  Installing Software used in .bashrc...${enda}"
@@ -367,8 +365,8 @@ echo
 package="bitwarden-bin"
 aurinstall
 
-#package="conky-lua-archers"
-#aurinstall
+package="conky-lua-archers"
+aurinstall
 
 package="cool-retro-term"
 aurinstall
