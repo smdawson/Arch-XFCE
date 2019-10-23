@@ -68,6 +68,26 @@ function showlogo {
   echo && echo -e " Version:" $g $b $version $endc $enda
 }
 
+# Use all cores to makepkg
+function allcores {
+	numberofcores=$(grep -c ^processor /proc/cpuinfo)
+
+if [ $numberofcores -gt 1 ]
+then
+        echo -e " ${b}[!]:: You have " $numberofcores" cores.${enda}"
+        echo -e " ${b}[!]:: Changing the makeflags for "$numberofcores" cores.${enda}"
+        sudo sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j'$(($numberofcores+1))'"/g' /etc/makepkg.conf;
+        echo -e " ${b}[!]:: Changing the compression settings for "$numberofcores" cores.${enda}"
+        sudo sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T '"$numberofcores"' -z -)/g' /etc/makepkg.conf
+else
+        echo -e " [${r}x${endc}]::[${b}No Change${enda}]"
+fi
+
+
+echo -e " [${g}✔${endc}]:: ${b}All Cores Will Be Used During Building and Compression!${enda}"
+sleep 3
+}
+
 # Update pacman -Syyu
 function updatepacman {
   echo 
@@ -246,7 +266,7 @@ function aurinstall {
 }
 
 function preliminary {
-	updatepacman && checkyay && checktrizen && checkgit && checkwget && addkeyservers && addtrustkeyarco && addtrustkeyseth && arcolinuxrepos && updatepacman && pause
+	allcores && updatepacman && checkyay && checktrizen && checkgit && checkwget && addkeyservers && addtrustkeyarco && addtrustkeyseth && arcolinuxrepos && updatepacman && pause
 }
 
 function programinstall {
