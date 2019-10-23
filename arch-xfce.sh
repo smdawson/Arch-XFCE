@@ -588,6 +588,32 @@ function programinstall {
 	package="yad"
 	aurinstall
 
+	package="zsh"
+	aurinstall
+
+	package="zsh-completions"
+	aurinstall
+
+	package="zsh-syntax-highlighting"
+	aurinstall
+
+	echo -e " ${b}[!]::[please wait]:  Downloading Oh-My-Zsh${enda}"
+
+	wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
+
+	# changing the theme to random so you can enjoy tons of themes.
+
+	sudo sed -i 's/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"random\"/g' ~/.zshrc
+
+	# If above line did not work somehow. This is what you should do to enjoy the many themes.
+	# go find the hidden .zshrc file and look for ZSH_THEME="robbyrussell" (CTRL+H to find hidden files)
+	# change this to ZSH_THEME="random"
+
+	echo '
+	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	neofetch
+	' >>  ~/.zshrc
+
 	echo -e " [${g}✔${endc}]::[${b}System Category${enda}]: Installed!"
 	echo
 	echo -e " ${b}[!]::[please wait]:  Installing Hardcode-Fixer...${enda}"
