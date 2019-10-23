@@ -20,7 +20,7 @@ set -e
 #                                                        #
 ##########################################################
 #
-#  TO DO - FIX CONKY, Fix Trust Keys
+#  TO DO:
 #
 ######################## Variables #######################
 #
@@ -480,6 +480,9 @@ function programinstall {
 	echo
 
 	package="downgrade"
+	aurinstall
+
+	package="font-manager-git"
 	aurinstall
 
 	package="inxi"
