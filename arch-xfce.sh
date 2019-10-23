@@ -246,21 +246,18 @@ function aurinstall {
 }
 
 function preliminary {
-	updatepacman
-	checkyay
-	checktrizen
-	checkgit
-	checkwget
-	addkeyservers
-	addtrustkeyarco
-	addtrustkeyseth
-	arcolinuxrepos
-	updatepacman
-	pause
+	updatepacman && checkyay && checktrizen && checkgit && checkwget && addkeyservers && addtrustkeyarco && addtrustkeyseth && arcolinuxrepos && updatepacman && pause
 }
 
 function programinstall {
 	updatepacman
+	echo -e " ${b}Installing Fonts From Arch Linux Repositories${enda}"
+	echo
+	sudo pacman -S --noconfirm --needed adobe-source-sans-pro-fonts cantarell-fonts noto-fonts terminus-font ttf-bitstream-vera ttf-dejavu ttf-droid 
+	sudo pacman -S --noconfirm --needed ttf-inconsolata ttf-liberation ttf-roboto ttf-ubuntu-font-family tamsyn-font
+	echo -e " [${g}✔${endc}]::[${b}Fonts From Arch Linus Repositories${enda}]: Installed!"
+	echo
+	sleep 3
 	# Install software used in .bashrc
 	echo -e " ${b}[!]::[please wait]:  Installing Software used in .bashrc...${enda}"
 	echo
@@ -645,16 +642,6 @@ function programinstall {
 	echo
 
 	sudo rm -rf ~/.config/volumeicon
-
-	sleep 3
-	echo -e " ${b}Installing Fonts From Arch Linux Repositories${enda}"
-	echo
-
-	sudo pacman -S --noconfirm --needed adobe-source-sans-pro-fonts cantarell-fonts noto-fonts terminus-font ttf-bitstream-vera ttf-dejavu ttf-droid 
-	sudo pacman -S --noconfirm --needed ttf-inconsolata ttf-liberation ttf-roboto ttf-ubuntu-font-family tamsyn-font
-
-	echo -e " [${g}✔${endc}]::[${b}Software From Arch User Repositories(AUR)${enda}]: Installed!"
-	echo
 	sleep 3
 
 	echo -e " ${b}Installing Fonts For Conkies${enda}"
