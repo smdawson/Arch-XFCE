@@ -90,7 +90,7 @@ else
 
 echo -e " [${r}x${endc}]::[${b}warning${enda}]:this script requires AUR Helpers"
 echo && echo -e " ${b}[!]::[please wait]: Installing Yay ..${enda}"
-git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm
 cd .. 
 rm -rf yay
 echo ""
@@ -107,7 +107,7 @@ else
 
 echo -e " [${r}x${endc}]::[${b}warning${enda}]:this script requires AUR Helpers"
 echo && echo -e " ${b}[!]::[please wait]: Installing Trizen ..${enda}"
-git clone https://aur.archlinux.org/trizen.git && cd trizen && makepkg -si 
+git clone https://aur.archlinux.org/trizen.git && cd trizen && makepkg -si --noconfirm
 cd ..
 rm -rf trizen
 echo ""
@@ -575,9 +575,9 @@ function programinstall {
 	package="ttf-mac-fonts"
 	aurinstall
 
-	sudo pacman -S --noconfirm --needed virtualbox virtualbox-host-dkms linux-lts-headers
-	sudo grub-mkconfig -o /boot/grub/grub.cfg
-	echo -e " [${g}✔${endc}]::[${b}Virtualbox For Linux${enda}]: Installed!"
+	#sudo pacman -S --noconfirm --needed virtualbox virtualbox-host-dkms linux-lts-headers
+	#sudo grub-mkconfig -o /boot/grub/grub.cfg
+	#echo -e " [${g}✔${endc}]::[${b}Virtualbox For Linux${enda}]: Installed!"
 
 	package="xcursor-breeze"
 	aurinstall
