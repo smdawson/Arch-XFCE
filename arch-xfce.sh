@@ -303,7 +303,7 @@ function programinstall {
 	sleep 3
 
 	# Install Sound Software
-	echo -e " ${b}[!]::[please wait]:  Installing Display Sound Software...${enda}"
+	echo -e " ${b}[!]::[please wait]:  Installing Sound Software...${enda}"
 	echo
 	sudo pacman -S --noconfirm --needed pulseaudio pulseaudio-alsa pavucontrol alsa-utils alsa-plugins alsa-lib alsa-firmware
 	sudo pacman -S --noconfirm --needed gstreamer gst-plugins-good gst-plugins-bad gst-plugins-base gst-plugins-ugly
@@ -347,7 +347,8 @@ function programinstall {
 	echo
 	echo -e " ${b}[!]::[please wait]:  Installing Accessories Category...${enda}"
 	echo
-	sudo pacman -S --noconfirm --needed catfish cmatrix galculator gnome-screenshot plank xfburn variety
+	sudo pacman -S --noconfirm --needed catfish cmatrix galculator gnome-screenshot plank xfburn
+	#sudo pacman -S --noconfirm --needed variety
 	echo -e " [${g}✔${endc}]::[${b}Accessories Category${enda}]: Installed!"
 	echo
 	echo -e " ${b}[!]::[please wait]:  Installing Development Category...${enda}"
@@ -377,7 +378,7 @@ function programinstall {
 	echo
 	echo -e " ${b}[!]::[please wait]:  Installing Offce Category...${enda}"
 	echo
-	sudo pacman -S --noconfirm --needed evince libreoffice-fresh thunderbird
+	sudo pacman -S --noconfirm --needed evince hunspell hunspell-en_US hyphen hyphen-en libmythes mythes-en libreoffice-fresh thunderbird
 	echo -e " [${g}✔${endc}]::[${b}Office Category${enda}]: Installed!"
 	echo
 	echo -e " ${b}[!]::[please wait]:  Installing System Category...${enda}"
@@ -649,8 +650,9 @@ function programinstall {
 	sudo pacman -S --noconfirm --needed arcolinux-lightdm-gtk-greeter arcolinux-lightdm-gtk-greeter-settings arcolinux-local-git arcolinux-mirrorlist-git
 	sudo pacman -S --noconfirm --needed arcolinux-nitrogen-git arcolinux-pipemenus-git arcolinux-plank-git arcolinux-plank-themes-git
 	sudo pacman -S --noconfirm --needed arcolinux-qt5-git arcolinux-rofi-git arcolinux-rofi-themes-git arcolinux-root-git arcolinux-slim
-	sudo pacman -S --noconfirm --needed arcolinux-slimlock-themes-git arcolinux-system-config-git arcolinux-termite-themes-git arcolinux-variety-git arcolinux-wallpapers-git
+	sudo pacman -S --noconfirm --needed arcolinux-slimlock-themes-git arcolinux-system-config-git arcolinux-termite-themes-git arcolinux-wallpapers-git
 	sudo pacman -S --noconfirm --needed arcolinux-xfce4-panel-profiles-git arcolinux-xfce-thunar-git
+	#sudo pacman -S --noconfirm --needed arcolinux-variety-git
 
 	echo -e " [${g}✔${endc}]::[${b}Software From ArcoLinux Repositories${enda}]: Installed!"
 	echo
