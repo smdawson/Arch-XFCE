@@ -321,7 +321,7 @@ function programinstall {
 	echo
 	sleep 3
 
-	# Install Samba
+	## Install Samba
 	echo -e " ${b}[!]::[please wait]:  Installing Samba...${enda}"
 	echo
 	sudo pacman -S --noconfirm --needed samba
@@ -406,7 +406,7 @@ function programinstall {
 	package="bitwarden-bin"
 	aurinstall
 
-	package="conky-lua-archers"
+	package="conky-lua-archers-git"
 	aurinstall
 
 	package="cool-retro-term"
