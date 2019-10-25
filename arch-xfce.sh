@@ -365,8 +365,8 @@ function programinstall {
 	echo
 	echo -e " ${b}[!]::[please wait]:  Installing Development Category...${enda}"
 	echo
-	sudo pacman -S --noconfirm --needed atom geany meld
-	echo -e " [${g}✔${endc}]::[${b}Accessories Category${enda}]: Installed!"
+	sudo pacman -S --noconfirm --needed atom devtools geany meld
+	echo -e " [${g}✔${endc}]::[${b}Development Category${enda}]: Installed!"
 	echo
 	echo -e " ${b}[!]::[please wait]:  Installing Games Category...${enda}"
 	echo
