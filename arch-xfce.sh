@@ -39,7 +39,7 @@ c='\E[36m'
 w='\E[37m'
 endc='\E[0m'
 enda='\033[0m'
-version="20191022"
+version="20191025"
 
 ######################## Functions #######################
 
@@ -269,6 +269,35 @@ function preliminary {
 	allcores && updatepacman && checkyay && checktrizen && checkgit && checkwget && addkeyservers && addtrustkeyarco && addtrustkeyseth && arcolinuxrepos && updatepacman && pause
 }
 
+function desktopinstall {
+	updatepacman
+	# Install Display Manager and Desktop
+	echo -e " ${b}[!]::[please wait]:  Installing Lightdm Display Manager and XFCE Desktop...${enda}"
+	echo
+	#installing displaymanager
+	sudo pacman -S --noconfirm --needed lightdm arcolinux-lightdm-gtk-greeter arcolinux-lightdm-gtk-greeter-settings arcolinux-wallpapers-git  
+	#installing desktop environment
+	sudo pacman -S --noconfirm --needed xfce4 xfce4-goodies
+	#enabling displaymanager
+	sudo systemctl enable lightdm.service -f
+	sudo systemctl set-default graphical.target
+	#Remove xfce4 artwork
+	sudo pacman -R xfce4-artwork --noconfirm
+	echo -e " [${g}✔${endc}]::[${b}Display Manager and XFCE Desktop${enda}]: Installed!"
+	echo
+	sleep 3
+	echo -e "${g}"
+	echo -e "##############################################################"
+	echo -e "#                                                            #"
+	echo -e "#                 Display Manager and Desktop                #"
+	echo -e "#                   Installation Complete!                   #"
+	echo -e "#         Restart Computer For Changes To Take Effect        #"
+	echo -e "#                                                            #"
+	echo -e "##############################################################${endc}"
+	echo
+	pause
+}
+
 function programinstall {
 	updatepacman
 	echo -e " ${b}Installing Fonts From Arch Linux Repositories${enda}"
@@ -283,22 +312,6 @@ function programinstall {
 	echo
 	sudo pacman -S --noconfirm --needed expac hwinfo reflector youtube-dl
 	echo -e " [${g}✔${endc}]::[${b}.bashrc Software${enda}]: Installed!"
-	echo
-	sleep 3
-
-	# Install Display Manager and Desktop
-	echo -e " ${b}[!]::[please wait]:  Installing Display Manager and XFCE Desktop...${enda}"
-	echo
-	#installing displaymanager or login manager
-	sudo pacman -S --noconfirm --needed lightdm arcolinux-lightdm-gtk-greeter arcolinux-lightdm-gtk-greeter-settings arcolinux-wallpapers-git  
-	#installing desktop environment
-	sudo pacman -S --noconfirm --needed xfce4 xfce4-goodies
-	#enabling displaymanager or login manager
-	sudo systemctl enable lightdm.service -f
-	sudo systemctl set-default graphical.target
-	#Remove xfce4 artwork
-	sudo pacman -R xfce4-artwork --noconfirm
-	echo -e " [${g}✔${endc}]::[${b}Display Manager and XFCE Desktop${enda}]: Installed!"
 	echo
 	sleep 3
 
@@ -347,8 +360,7 @@ function programinstall {
 	echo
 	echo -e " ${b}[!]::[please wait]:  Installing Accessories Category...${enda}"
 	echo
-	sudo pacman -S --noconfirm --needed catfish cmatrix galculator gnome-screenshot plank xfburn
-	#sudo pacman -S --noconfirm --needed variety
+	sudo pacman -S --noconfirm --needed catfish cmatrix galculator gnome-screenshot plank variety xfburn
 	echo -e " [${g}✔${endc}]::[${b}Accessories Category${enda}]: Installed!"
 	echo
 	echo -e " ${b}[!]::[please wait]:  Installing Development Category...${enda}"
@@ -651,8 +663,7 @@ function programinstall {
 	sudo pacman -S --noconfirm --needed arcolinux-nitrogen-git arcolinux-pipemenus-git arcolinux-plank-git arcolinux-plank-themes-git
 	sudo pacman -S --noconfirm --needed arcolinux-qt5-git arcolinux-rofi-git arcolinux-rofi-themes-git arcolinux-root-git arcolinux-slim
 	sudo pacman -S --noconfirm --needed arcolinux-slimlock-themes-git arcolinux-system-config-git arcolinux-termite-themes-git arcolinux-wallpapers-git
-	sudo pacman -S --noconfirm --needed arcolinux-xfce4-panel-profiles-git arcolinux-xfce-thunar-git
-	#sudo pacman -S --noconfirm --needed arcolinux-variety-git
+	sudo pacman -S --noconfirm --needed arcolinux-xfce4-panel-profiles-git arcolinux-variety-git arcolinux-xfce-thunar-git
 
 	echo -e " [${g}✔${endc}]::[${b}Software From ArcoLinux Repositories${enda}]: Installed!"
 	echo
@@ -684,12 +695,12 @@ function programinstall {
 	sleep 3
 	clear
 	echo -e "${g}"
-	echo -e "**************************************************************"
-	echo -e "*                                                            *"
-	echo -e "*                 Installation Complete!                     *"
-	echo -e "*         Restart Computer For Changes To Take Effect        *"
-	echo -e "*                                                            *"
-	echo -e "**************************************************************${endc}"
+	echo -e "##############################################################"
+	echo -e "#                                                            #"
+	echo -e "#                 Installation Complete!                     #"
+	echo -e "#         Restart Computer For Changes To Take Effect        #"
+	echo -e "#                                                            #"
+	echo -e "##############################################################${endc}"
 	echo
 	pause
 }
@@ -706,9 +717,10 @@ function showmenu {
 	echo -e "###########################################################${endc}"
 	echo
 	echo -e "1. Install Preliminary Requirements ${r}${b}(Do This First and ONLY Once)${enda}${endc}"
-	echo "2. Install Desktop, Programs and Apps"
+	echo "2. Install Display Manager and XFCE Desktop"
+	echo "3. Install Programs and Apps"
 	echo "==========================================================="
-	echo "3. Exit"
+	echo "4. Exit"
 	echo
 }
 
@@ -717,6 +729,7 @@ function readoptions {
 	read -p "Enter choice [ 1 - 3 ] " choice
 	case $choice in
 		1) preliminary ;;
+		2) desktopinstall ;;
 		2) programinstall ;;
 		3) clear && exit 0;;
 		*) echo -e " [${r}ERROR${endc}]::Invalid Key Try Again" && sleep 2
