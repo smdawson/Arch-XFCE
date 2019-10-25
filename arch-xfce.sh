@@ -275,7 +275,7 @@ function programinstall {
 	echo
 	sudo pacman -S --noconfirm --needed adobe-source-sans-pro-fonts cantarell-fonts noto-fonts terminus-font ttf-bitstream-vera ttf-dejavu ttf-droid 
 	sudo pacman -S --noconfirm --needed ttf-inconsolata ttf-liberation ttf-roboto ttf-ubuntu-font-family tamsyn-font
-	echo -e " [${g}✔${endc}]::[${b}Fonts From Arch Linus Repositories${enda}]: Installed!"
+	echo -e " [${g}✔${endc}]::[${b}Fonts From Arch Linux Repositories${enda}]: Installed!"
 	echo
 	sleep 3
 	# Install software used in .bashrc
