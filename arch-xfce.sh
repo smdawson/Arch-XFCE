@@ -360,7 +360,7 @@ function programinstall {
 	echo
 	echo -e " ${b}[!]::[please wait]:  Installing Accessories Category...${enda}"
 	echo
-	sudo pacman -S --noconfirm --needed catfish cmatrix galculator gnome-screenshot plank variety xfburn
+	sudo pacman -S --noconfirm --needed catfish cmatrix galculator gnome-screenshot plank xfburn
 	echo -e " [${g}✔${endc}]::[${b}Accessories Category${enda}]: Installed!"
 	echo
 	echo -e " ${b}[!]::[please wait]:  Installing Development Category...${enda}"
@@ -663,7 +663,7 @@ function programinstall {
 	sudo pacman -S --noconfirm --needed arcolinux-nitrogen-git arcolinux-pipemenus-git arcolinux-plank-git arcolinux-plank-themes-git
 	sudo pacman -S --noconfirm --needed arcolinux-qt5-git arcolinux-rofi-git arcolinux-rofi-themes-git arcolinux-root-git arcolinux-slim
 	sudo pacman -S --noconfirm --needed arcolinux-slimlock-themes-git arcolinux-system-config-git arcolinux-termite-themes-git arcolinux-wallpapers-git
-	sudo pacman -S --noconfirm --needed arcolinux-xfce4-panel-profiles-git arcolinux-variety-git arcolinux-xfce-thunar-git
+	sudo pacman -S --noconfirm --needed arcolinux-xfce4-panel-profiles-git arcolinux-xfce-thunar-git
 
 	echo -e " [${g}✔${endc}]::[${b}Software From ArcoLinux Repositories${enda}]: Installed!"
 	echo
@@ -705,6 +705,27 @@ function programinstall {
 	pause
 }
 
+function varietyinstall {
+	echo -e " ${b}[!]::[please wait]:  Installing Variety Wallpaper Changer...${enda}"
+	echo
+	sudo pacman -S --noconfirm --needed variety
+	sudo pacman -S --noconfirm --needed arcolinux-variety-git
+
+	echo -e " [${g}✔${endc}]::[${b}Variety Wallpaper Changer${enda}]: Installed!"
+	echo
+	sleep 3
+	clear
+	echo -e "${g}"
+	echo -e "##############################################################"
+	echo -e "#                                                            #"
+	echo -e "#                 Installation Complete!                     #"
+	echo -e "#         Restart Computer For Changes To Take Effect        #"
+	echo -e "#                                                            #"
+	echo -e "##############################################################${endc}"
+	echo
+	pause
+}
+
 # function to display menus
 function showmenu {
 	clear
@@ -719,8 +740,9 @@ function showmenu {
 	echo -e "1. Install Preliminary Requirements ${r}${b}(Do This First and ONLY Once)${enda}${endc}"
 	echo "2. Install Display Manager and XFCE Desktop"
 	echo "3. Install Programs and Apps"
+	echo "4. Install Variety Wallpaper Changer"
 	echo "==========================================================="
-	echo "4. Exit"
+	echo "5. Exit"
 	echo
 }
 
@@ -731,7 +753,8 @@ function readoptions {
 		1) preliminary ;;
 		2) desktopinstall ;;
 		3) programinstall ;;
-		4) clear && exit 0;;
+		4) varietyinstall ;;
+		5) clear && exit 0;;
 		*) echo -e " [${r}ERROR${endc}]::Invalid Key Try Again" && sleep 2
 	esac
 }
