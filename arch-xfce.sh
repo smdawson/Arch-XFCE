@@ -726,7 +726,7 @@ function showmenu {
 
 function readoptions {
 	local choice
-	read -p "Enter choice [ 1 - 3 ] " choice
+	read -p "Enter choice [ 1 - 4 ] " choice
 	case $choice in
 		1) preliminary ;;
 		2) desktopinstall ;;
