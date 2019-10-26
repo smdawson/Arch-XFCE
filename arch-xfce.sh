@@ -730,8 +730,8 @@ function readoptions {
 	case $choice in
 		1) preliminary ;;
 		2) desktopinstall ;;
-		2) programinstall ;;
-		3) clear && exit 0;;
+		3) programinstall ;;
+		4) clear && exit 0;;
 		*) echo -e " [${r}ERROR${endc}]::Invalid Key Try Again" && sleep 2
 	esac
 }
