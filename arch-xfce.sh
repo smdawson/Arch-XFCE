@@ -390,7 +390,7 @@ function programinstall {
 	echo
 	echo -e " ${b}[!]::[please wait]:  Installing Offce Category...${enda}"
 	echo
-	sudo pacman -S --noconfirm --needed evince hunspell hunspell-en_US hyphen hyphen-en libmythes mythes-en libreoffice-fresh thunderbird
+	sudo pacman -S --noconfirm --needed evince evolution hunspell hunspell-en_US hyphen hyphen-en libmythes mythes-en libreoffice-fresh
 	echo -e " [${g}✔${endc}]::[${b}Office Category${enda}]: Installed!"
 	echo
 	echo -e " ${b}[!]::[please wait]:  Installing System Category...${enda}"
