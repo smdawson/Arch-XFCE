@@ -39,7 +39,7 @@ c='\E[36m'
 w='\E[37m'
 endc='\E[0m'
 enda='\033[0m'
-version="20191025"
+version="20191103"
 
 ######################## Functions #######################
 
@@ -72,19 +72,17 @@ function showlogo {
 function allcores {
 	numberofcores=$(grep -c ^processor /proc/cpuinfo)
 
-if [ $numberofcores -gt 1 ]
-then
-        echo -e " ${b}[!]:: You have " $numberofcores" cores.${enda}"
-        echo -e " ${b}[!]:: Changing the makeflags for "$numberofcores" cores.${enda}"
-        sudo sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j'$(($numberofcores+1))'"/g' /etc/makepkg.conf;
-        echo -e " ${b}[!]:: Changing the compression settings for "$numberofcores" cores.${enda}"
-        sudo sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T '"$numberofcores"' -z -)/g' /etc/makepkg.conf
-else
-        echo -e " [${r}x${endc}]::[${b}No Change${enda}]"
-fi
-
-
-echo -e " [${g}✔${endc}]:: ${b}All Cores Will Be Used During Building and Compression!${enda}"
+	if [ $numberofcores -gt 1 ]
+	then
+    	    echo "You have " $numberofcores" cores."
+        	echo "Changing the makeflags for "$numberofcores" cores."
+        	sudo sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j'$(($numberofcores+1))'"/g' /etc/makepkg.conf;
+        	echo "Changing the compression settings for "$numberofcores" cores."
+        	sudo sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T '"$numberofcores"' -z -)/g' /etc/makepkg.conf
+	else
+    	    echo -e " [${r}x${endc}]::[${b}No Change${enda}]"
+	fi
+	echo -e " [${g}✔${endc}]:: ${b}All Cores Will Be Used During Building and Compression!${enda}"
 sleep 3
 }
 
@@ -255,14 +253,20 @@ function aurinstall {
 	if pacman -Qi $package &> /dev/null; then
 			echo -e " [${g}✔${endc}]::[${b}"$package"${enda}] Is Already Installed!"
 	else
-		yay -S --noconfirm $package
+		if pacman -Qi yay &> /dev/null; then
+			echo -e " ${y}Installing with yay ${endc}"
+			yay -S --noconfirm $package
+		elif pacman -Qi trizen &> /dev/null; then
+			echo -e " ${y}Installing with trizen ${endc}"
+			trizen -S --noconfirm --needed --noedit $package
+		fi
+	fi		
 		# Verify Successful Installation
 		if pacman -Qi $package &> /dev/null; then
 			echo -e " [${g}✔${endc}]::[${b}"$package"${enda}]: Installed!"
 		else
 			echo -e " [${r}!${endc}]::[${b}"$package"${enda}]: ${r}NOT Installed!${endc}"
 		fi
-	fi
 }
 
 function preliminary {
@@ -302,7 +306,7 @@ function programinstall {
 	updatepacman
 	echo -e " ${b}Installing Fonts From Arch Linux Repositories${enda}"
 	echo
-	sudo pacman -S --noconfirm --needed adobe-source-sans-pro-fonts cantarell-fonts noto-fonts terminus-font ttf-bitstream-vera ttf-dejavu ttf-droid 
+	sudo pacman -S --noconfirm --needed adobe-source-sans-pro-fonts cantarell-fonts noto-fonts ttf-bitstream-vera ttf-dejavu ttf-droid 
 	sudo pacman -S --noconfirm --needed ttf-inconsolata ttf-liberation ttf-roboto ttf-ubuntu-font-family tamsyn-font
 	echo -e " [${g}✔${endc}]::[${b}Fonts From Arch Linux Repositories${enda}]: Installed!"
 	echo
@@ -385,7 +389,7 @@ function programinstall {
 	echo
 	echo -e " ${b}[!]::[please wait]:  Installing Multimedia Category...${enda}"
 	echo
-	sudo pacman -S --noconfirm --needed pragha simplescreenrecorder vlc
+	sudo pacman -S --noconfirm --needed audacity pragha simplescreenrecorder vlc
 	echo -e " [${g}✔${endc}]::[${b}Multimedia Category${enda}]: Installed!"
 	echo
 	echo -e " ${b}[!]::[please wait]:  Installing Offce Category...${enda}"
@@ -663,7 +667,7 @@ function programinstall {
 	sudo pacman -S --noconfirm --needed arcolinux-nitrogen-git arcolinux-pipemenus-git arcolinux-plank-git arcolinux-plank-themes-git
 	sudo pacman -S --noconfirm --needed arcolinux-qt5-git arcolinux-rofi-git arcolinux-rofi-themes-git arcolinux-root-git arcolinux-slim
 	sudo pacman -S --noconfirm --needed arcolinux-slimlock-themes-git arcolinux-system-config-git arcolinux-termite-themes-git arcolinux-variety-git arcolinux-wallpapers-git
-	sudo pacman -S --noconfirm --needed arcolinux-xfce4-panel-profiles-git arcolinux-xfce-thunar-git
+	sudo pacman -S --noconfirm --needed arcolinux-xfce-dconf-git arcolinux-xfce4-panel-profiles-git arcolinux-xfce-thunar-git
 
 	echo -e " [${g}✔${endc}]::[${b}Software From ArcoLinux Repositories${enda}]: Installed!"
 	echo
