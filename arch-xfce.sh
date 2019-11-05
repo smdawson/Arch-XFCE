@@ -667,7 +667,7 @@ function programinstall {
 	sudo pacman -S --noconfirm --needed arcolinux-arc-themes-nico-git arcolinux-bin-git arcolinux-config-xfce-git
 	sudo pacman -S --noconfirm --needed arcolinux-conky-collection-git arcolinux-faces-git arcolinux-fonts-git arcolinux-geany-git arcolinux-hblock-git arcolinux-kvantum-git
 	sudo pacman -S --noconfirm --needed arcolinux-lightdm-gtk-greeter arcolinux-lightdm-gtk-greeter-settings arcolinux-local-applications-git arcolinux-local-xfce4-git arcolinux-mirrorlist-git
-	sudo pacman -S --noconfirm --needed arcolinux-nitrogen-git arcolinux-pipemenus-git arcolinux-plank-git arcolinux-plank-themes-git
+	sudo pacman -S --noconfirm --needed arcolinux-nitrogen-git arcolinux-pipemenus-git arcolinux-plank-themes-git
 	sudo pacman -S --noconfirm --needed arcolinux-qt5-git arcolinux-rofi-git arcolinux-rofi-themes-git arcolinux-root-git arcolinux-slim
 	sudo pacman -S --noconfirm --needed arcolinux-slimlock-themes-git arcolinux-system-config-git arcolinux-termite-themes-git arcolinux-wallpapers-git
 	sudo pacman -S --noconfirm --needed arcolinux-xfce-dconf-git arcolinux-xfce4-panel-profiles-git arcolinux-xfce-git
