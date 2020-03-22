@@ -1,0 +1,2 @@
+conky -c /home/seth/.config/conky/AP-Weather-Red.conkyrc & sleep 1s
+conky -c /home/seth/.config/conky/JA-Thin-Time.conkyrc & sleep 1s
