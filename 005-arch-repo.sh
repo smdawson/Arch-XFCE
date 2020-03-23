@@ -10,6 +10,10 @@ set -e
 
 # software from standard Arch Linux repositories
 # Core, Extra, Community, Multilib repositories
+echo "Installing the software ArcoLinux uses in .bashrc"
+
+sudo pacman -S --noconfirm --needed expac hwinfo reflector youtube-dl
+
 echo "Installing category Accessories"
 
 sudo pacman -S --noconfirm --needed catfish cronie galculator gnome-screenshot plank xfburn variety yad
