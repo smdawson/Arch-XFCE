@@ -1,0 +1,25 @@
+# Maintainer: Seth Dawson <seth.dawson@hotmail.com>
+pkgname=smd-archlinux-mirrorlist-git
+_pkgname=smd-archlinux-mirrorlist
+_destname1="/etc/pacman.d/"
+_licensedir="/usr/share/smd-archlinux/licenses/"
+pkgver=1.0
+pkgrel=1
+pkgdesc="SMD ArchLinux mirrorlist for use by pacman"
+arch=('any')
+url="https://github.com/smdawson/smd-archlinux-mirrorlist"
+license=('GPL3')
+makedepends=('git')
+depends=()
+provides=("${pkgname}")
+options=(!strip !emptydirs)
+source=(${_pkgname}::"git+https://github.com/smdawson/${_pkgname}.git")
+sha256sums=('SKIP')
+backup=(etc/pacman.d/smd-archlinux-mirrorlist)
+package() {
+	install -dm755 ${pkgdir}${_licensedir}${_pkgname}
+	install -m644  ${srcdir}/${_pkgname}/LICENSE ${pkgdir}${_licensedir}${_pkgname}
+
+	install -dm755 ${pkgdir}${_destname1}
+	install -m644  ${srcdir}/${_pkgname}${_destname1}* ${pkgdir}${_destname1}
+}
