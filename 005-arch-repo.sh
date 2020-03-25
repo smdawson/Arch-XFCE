@@ -20,7 +20,7 @@ sudo pacman -S --noconfirm --needed catfish cronie galculator gnome-screenshot p
 
 echo "Installing category Development"
 
-sudo pacman -S --noconfirm --needed atom geany meld
+sudo pacman -S --noconfirm --needed atom devtools geany meld
 
 echo "Installing category Games"
 
