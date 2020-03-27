@@ -12,13 +12,17 @@ set -e
 # Core, Extra, Community, Multilib repositories
 echo "Installing the software ArcoLinux uses in .bashrc"
 
-sudo pacman -S --noconfirm --needed expac hwinfo reflector youtube-dl
+sudo pacman -S --noconfirm --needed asciiquarium cmatrix cool-retro-term cowfortune mc ranger sl
 
 echo "Installing category Accessories"
 
 sudo pacman -S --noconfirm --needed catfish cronie galculator gnome-screenshot plank xfburn variety yad
 
 echo "Installing category Development"
+
+sudo pacman -S --noconfirm --needed atom devtools geany meld
+
+echo "Installing category Fun Stuff"
 
 sudo pacman -S --noconfirm --needed atom devtools geany meld
 
@@ -32,7 +36,7 @@ sudo pacman -S --noconfirm --needed gimp gnome-font-viewer gpick inkscape nomacs
 
 echo "Installing category Internet"
 
-sudo pacman -S --noconfirm --needed firefox hexchat qbittorrent telegram-desktop
+sudo pacman -S --noconfirm --needed discord firefox hexchat qbittorrent telegram-desktop
 
 echo "Installing category Multimedia"
 

@@ -162,6 +162,17 @@ echo "Installing category Development"
 package="sublime-text-dev"
 aurinstall
 
+echo "Installing category Fun Stuff"
+
+package="bash-pipes"
+aurinstall
+
+package="boxes"
+aurinstall
+
+package="gotop-bin"
+aurinstall
+
 echo "Installing category Multimedia"
 
 package="gradio"
@@ -179,6 +190,9 @@ package="joplin"
 aurinstall
 
 echo "Installing category System"
+
+package="bibata-cursor-theme"
+aurinstall
 
 package="downgrade"
 aurinstall
