@@ -12,7 +12,7 @@ set -e
 # Core, Extra, Community, Multilib repositories
 echo "Installing the software ArcoLinux uses in .bashrc"
 
-sudo pacman -S --noconfirm --needed asciiquarium cmatrix cool-retro-term cowfortune mc ranger sl
+sudo pacman -S --noconfirm --needed asciiquarium cmatrix cool-retro-term cowfortune fortune-mod mc ranger sl
 
 echo "Installing category Accessories"
 
