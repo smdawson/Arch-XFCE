@@ -26,7 +26,7 @@ sudo pacman -S arcolinux-local-applications-git --noconfirm --needed
 sudo pacman -S arcolinux-local-xfce4-git --noconfirm --needed
 sudo pacman -S arcolinux-mirrorlist-git --noconfirm --needed
 sudo pacman -S arcolinux-neofetch-git --noconfirm --needed
-sudo pacman -S arcolinux-nitrogen-git --noconfirm --needed
+#sudo pacman -S arcolinux-nitrogen-git --noconfirm --needed
 sudo pacman -S arcolinux-pipemenus-git --noconfirm --needed
 sudo pacman -S arcolinux-plank-git --noconfirm --needed
 sudo pacman -S arcolinux-plank-themes-git --noconfirm --needed
