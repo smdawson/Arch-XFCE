@@ -14,34 +14,33 @@ set -e
 echo "################################################################"
 echo
 
-sudo pacman -S arcolinux-arc-themes-nico-git --noconfirm --needed
-sudo pacman -S arcolinux-conky-collection-git --noconfirm --needed
-sudo pacman -S arcolinux-cron-git --noconfirm --needed
-sudo pacman -S arcolinux-fonts-git --noconfirm --needed
-sudo pacman -S arcolinux-geany-git --noconfirm --needed
-sudo pacman -S arcolinux-hblock-git --noconfirm --needed
-sudo pacman -S arcolinux-kvantum-git --noconfirm --needed
-sudo pacman -S arcolinux-lightdm-gtk-greeter --noconfirm --needed
-sudo pacman -S arcolinux-local-applications-git --noconfirm --needed
-sudo pacman -S arcolinux-local-xfce4-git --noconfirm --needed
-sudo pacman -S arcolinux-mirrorlist-git --noconfirm --needed
-sudo pacman -S arcolinux-neofetch-git --noconfirm --needed
-#sudo pacman -S arcolinux-nitrogen-git --noconfirm --needed
-sudo pacman -S arcolinux-pipemenus-git --noconfirm --needed
-sudo pacman -S arcolinux-plank-git --noconfirm --needed
-sudo pacman -S arcolinux-plank-themes-git --noconfirm --needed
-sudo pacman -S arcolinux-qt5-git --noconfirm --needed
-sudo pacman -S arcolinux-rofi-git --noconfirm --needed
-sudo pacman -S arcolinux-rofi-themes-git --noconfirm --needed
-sudo pacman -S arcolinux-root-git --noconfirm --needed
-sudo pacman -S arcolinux-system-config-git --noconfirm --needed
-sudo pacman -S arcolinux-termite-themes-git --noconfirm --needed
-sudo pacman -S arcolinux-variety-git --noconfirm --needed
-sudo pacman -S arcolinux-wallpapers-git --noconfirm --needed
-sudo pacman -S arcolinux-xfce4-panel-profiles-git --noconfirm --needed
-sudo pacman -S arcolinux-xfce-git --noconfirm --needed
-sudo pacman -S arcolinux-config-xfce-git --noconfirm --needed
-sudo pacman -S --noconfirm --needed  arcolinux-xfce-dconf-git
+sudo pacman -S smd-arch-arc-themes-nico-git --noconfirm --needed
+sudo pacman -S smd-arch-conky-collection-git --noconfirm --needed
+sudo pacman -S smd-arch-fonts-git --noconfirm --needed
+sudo pacman -S smd-arch-geany-git --noconfirm --needed
+sudo pacman -S smd-arch-hblock-git --noconfirm --needed
+sudo pacman -S smd-arch-kvantum-git --noconfirm --needed
+sudo pacman -S smd-arch-lightdm-gtk-greeter --noconfirm --needed
+sudo pacman -S smd-arch-local-applications-git --noconfirm --needed
+sudo pacman -S smd-arch-local-xfce4-git --noconfirm --needed
+#sudo pacman -S smd-arch-mirrorlist-git --noconfirm --needed
+sudo pacman -S smd-arch-neofetch-git --noconfirm --needed
+#sudo pacman -S smd-arch-nitrogen-git --noconfirm --needed
+sudo pacman -S smd-arch-pipemenus-git --noconfirm --needed
+sudo pacman -S smd-arch-plank-git --noconfirm --needed
+sudo pacman -S smd-arch-plank-themes-git --noconfirm --needed
+sudo pacman -S smd-arch-qt5-git --noconfirm --needed
+sudo pacman -S smd-arch-rofi-git --noconfirm --needed
+sudo pacman -S smd-arch-rofi-themes-git --noconfirm --needed
+sudo pacman -S smd-arch-root-git --noconfirm --needed
+sudo pacman -S smd-arch-system-config-git --noconfirm --needed
+sudo pacman -S smd-arch-termite-themes-git --noconfirm --needed
+sudo pacman -S smd-arch-variety-git --noconfirm --needed
+sudo pacman -S smd-arch-wallpapers-git --noconfirm --needed
+sudo pacman -S smd-arch-xfce4-panel-profiles-git --noconfirm --needed
+sudo pacman -S smd-arch-xfce-git --noconfirm --needed
+sudo pacman -S smd-arch-config-xfce-git --noconfirm --needed
+sudo pacman -S --noconfirm --needed  smd-arch-xfce-dconf-git
 
 
 echo "################################################################"

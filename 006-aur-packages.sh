@@ -178,9 +178,6 @@ echo "Installing category Multimedia"
 package="gradio"
 aurinstall
 
-package="radiotray"
-aurinstall
-
 package="pithos"
 aurinstall
 
@@ -264,9 +261,6 @@ package="sardi-flat-colora-variations-icons-git"
 aurinstall
 
 package="sardi-colora-variations-icons-git"
-aurinstall
-
-package="screenkey-git"
 aurinstall
 
 package="surfn-icons-git"
