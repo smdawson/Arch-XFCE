@@ -51,8 +51,8 @@ echo "Installing category System"
 sudo pacman -S --noconfirm --needed arc-gtk-theme accountsservice baobab curl dconf-editor dmenu dmidecode ffmpegthumbnailer git glances gnome-disk-utility gnome-keyring gparted go
 sudo pacman -S --noconfirm --needed grsync gtk-engine-murrine gvfs gvfs-mtp hardinfo hddtemp htop imagemagick kvantum-qt5 kvantum-theme-arc lm_sensors lsb-release mlocate neofetch
 sudo pacman -S --noconfirm --needed net-tools noto-fonts numlockx polkit-gnome qt5ct refelctor sane screenfetch scrot simple-scan sysstat termite thunar thunar-archive-plugin thunar-volman 
-sudo pacman -S --noconfirm --needed tumbler virtualbox-host-modules-arch virtualbox vnstat w3m wget wmctrl unclutter rxvt-unicode urxvt-perls xclip xdg-user-dirs xdo xdotool xfce4-notifyd
-sudo pacman -S --noconfirm --needed zenity zsh zsh-completions zsh-syntax-highlighting
+sudo pacman -S --noconfirm --needed tumbler virtualbox-host-modules-arch virtualbox vnstat w3m wget wmctrl unclutter rxvt-unicode urxvt-perls whois xclip xdg-user-dirs xdo xdotool 
+sudo pacman -S --noconfirm --needed xfce4-notifyd zenity zsh zsh-completions zsh-syntax-highlighting
 
 echo "################################################################"
 echo "##      Removing all the messages virtualbox produces         ##"
