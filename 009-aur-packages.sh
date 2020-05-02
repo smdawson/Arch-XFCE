@@ -173,6 +173,9 @@ aurinstall
 package="gotop-bin"
 aurinstall
 
+package="hollywood"
+aurinstall
+
 echo "Installing category Multimedia"
 
 package="gradio"
