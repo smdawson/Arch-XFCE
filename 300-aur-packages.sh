@@ -110,170 +110,176 @@ sleep 3
 function aurinstall {
 	#----------------------------------------------------------------------------------
 	# Check If Package Is Installed
-	if pacman -Qi $package &> /dev/null; then
-			echo -e " [${g}✔${endc}]::[${b}"$package"${enda}] Is Already Installed!"
+	if pacman -Qi $1 &> /dev/null; then
+			echo -e " [${g}✔${endc}]::[${b}"$1"${enda}] Is Already Installed!"
 	else
 		if pacman -Qi yay &> /dev/null; then
 			echo -e " ${y}Installing with yay ${endc}"
-			yay -S --noconfirm $package
+			yay -S --noconfirm $1
 		elif pacman -Qi trizen &> /dev/null; then
 			echo -e " ${y}Installing with trizen ${endc}"
-			trizen -S --noconfirm --needed --noedit $package
+			trizen -S --noconfirm --needed --noedit $1
 		fi
 	fi
 		# Verify Successful Installation
-		if pacman -Qi $package &> /dev/null; then
-			echo -e " [${g}✔${endc}]::[${b}"$package"${enda}]: Installed!"
+		if pacman -Qi $1 &> /dev/null; then
+			echo -e " [${g}✔${endc}]::[${b}"$1"${enda}]: Installed!"
 		else
-			echo -e " [${r}!${endc}]::[${b}"$package"${enda}]: ${r}NOT Installed!${endc}"
+			echo -e " [${r}!${endc}]::[${b}"$1"${enda}]: ${r}NOT Installed!${endc}"
 		fi
+}
+
+function category {
+	tput setaf 5;
+	echo "################################################################"
+	echo "Installing software for category " $1
+	echo "################################################################"
+	echo;tput sgr0
 }
 
 checkyay && checktrizen && checkgit && checkwget
 
-echo "Installing Category Distro Specific"
+###############################################################################
 
-package="mugshot"
-aurinstall
+category Distro_Specific
 
-package="menulibre"
-aurinstall
+list=(
+mugshot
+menulibre
+xfce4-panel-profiles
+)
 
-package="xfce4-panel-profiles"
-aurinstall
+count=0
+for name in "${list[@]}" ; do
+	count=$[count+1]
+	tput setaf 3;echo "Installing package nr.  "$count " " $name;tput sgr0;
+	aurinstall $name
+done
 
-echo "Installing category Accessories"
+###############################################################################
 
-package="conky-lua-archers-git"
-aurinstall
+category Accessories
 
-package="python-pyparted"
-aurinstall
+list=(
+conky-lua-archers-git
+mintstick-git
+bitwarden-bin
+)
 
-package="mintstick-git"
-aurinstall
+count=0
+for name in "${list[@]}" ; do
+	count=$[count+1]
+	tput setaf 3;echo "Installing package nr.  "$count " " $name;tput sgr0;
+	aurinstall $name
+done
 
+###############################################################################
 
-package="bitwarden-bin"
-aurinstall
+category Development
 
-echo "Installing category Development"
+list=(
+sublime-text-dev
+)
 
-package="sublime-text-dev"
-aurinstall
+count=0
+for name in "${list[@]}" ; do
+	count=$[count+1]
+	tput setaf 3;echo "Installing package nr.  "$count " " $name;tput sgr0;
+	aurinstall $name
+done
 
-echo "Installing category Fun Stuff"
+###############################################################################
 
-package="bash-pipes"
-aurinstall
+category Fun_Stuff
 
-package="boxes"
-aurinstall
+list=(
+bash-pipes
+boxes
+gotop-bin
+hollywood
+)
 
-package="gotop-bin"
-aurinstall
+count=0
+for name in "${list[@]}" ; do
+	count=$[count+1]
+	tput setaf 3;echo "Installing package nr.  "$count " " $name;tput sgr0;
+	aurinstall $name
+done
 
-package="hollywood"
-aurinstall
+###############################################################################
 
-echo "Installing category Multimedia"
+category Multimedia
 
-package="gradio"
-aurinstall
+list=(
+gradio
+pithos
+)
 
-package="pithos"
-aurinstall
+count=0
+for name in "${list[@]}" ; do
+	count=$[count+1]
+	tput setaf 3;echo "Installing package nr.  "$count " " $name;tput sgr0;
+	aurinstall $name
+done
 
-echo "Installing category Office"
+###############################################################################
 
-package="joplin"
-aurinstall
+category Office
 
-echo "Installing category System"
+list=(
+joplin
+)
 
-package="bibata-cursor-theme"
-aurinstall
+count=0
+for name in "${list[@]}" ; do
+	count=$[count+1]
+	tput setaf 3;echo "Installing package nr.  "$count " " $name;tput sgr0;
+	aurinstall $name
+done
 
-package="downgrade"
-aurinstall
+###############################################################################
 
-package="font-manager-git"
-aurinstall
+category System
 
-package="inxi"
-aurinstall
+list=(
+bibata-cursor-theme
+downgrade
+font-manager-git
+inxi
+numix-circle-icon-theme-git
+oxy-neon
+pamac-aur
+sardi-icons
+sardi-orb-colora-variations-icons-git
+sardi-orb-colora-mixing-icons-git
+sardi-mono-papirus-colora-variations-icons-git
+sardi-mono-numix-colora-variations-icons-git
+sardi-mono-mixing-icons-git
+sardi-mono-colora-variations-icons-git
+sardi-mixing-icons-git
+sardi-ghost-flexible-variations-icons-git
+sardi-ghost-flexible-mixing-icons-git
+sardi-ghost-flexible-colora-variations-icons-git
+sardi-flexible-variations-icons-git
+sardi-flexible-mixing-icons-git
+sardi-flexible-luv-colora-variations-icons-git
+sardi-flexible-colora-variations-icons-git
+sardi-flat-mixing-icons-git
+sardi-flat-colora-variations-icons-git
+sardi-colora-variations-icons-git
+surfn-icons-git
+the_platinum_searcher-bin
+ttf-mac-fonts
+)
 
-package="numix-circle-icon-theme-git"
-aurinstall
+count=0
+for name in "${list[@]}" ; do
+	count=$[count+1]
+	tput setaf 3;echo "Installing package nr.  "$count " " $name;tput sgr0;
+	aurinstall $name
+done
 
-package="oxy-neon"
-aurinstall
-
-package="pamac-aur"
-aurinstall
-
-package="sardi-icons"
-aurinstall
-
-package="sardi-orb-colora-variations-icons-git"
-aurinstall
-
-package="sardi-orb-colora-mixing-icons-git"
-aurinstall
-
-package="sardi-mono-papirus-colora-variations-icons-git"
-aurinstall
-
-package="sardi-mono-numix-colora-variations-icons-git"
-aurinstall
-
-package="sardi-mono-mixing-icons-git"
-aurinstall
-
-package="sardi-mono-colora-variations-icons-git"
-aurinstall
-
-package="sardi-mixing-icons-git"
-aurinstall
-
-package="sardi-ghost-flexible-variations-icons-git"
-aurinstall
-
-package="sardi-ghost-flexible-mixing-icons-git"
-aurinstall
-
-package="sardi-ghost-flexible-colora-variations-icons-git"
-aurinstall
-
-package="sardi-flexible-variations-icons-git"
-aurinstall
-
-package="sardi-flexible-mixing-icons-git"
-aurinstall
-
-package="sardi-flexible-luv-colora-variations-icons-git"
-aurinstall
-
-package="sardi-flexible-colora-variations-icons-git"
-aurinstall
-
-package="sardi-flat-mixing-icons-git"
-aurinstall
-
-package="sardi-flat-colora-variations-icons-git"
-aurinstall
-
-package="sardi-colora-variations-icons-git"
-aurinstall
-
-package="surfn-icons-git"
-aurinstall
-
-package="the_platinum_searcher-bin"
-aurinstall
-
-package="ttf-mac-fonts"
-aurinstall
+###############################################################################
 
 echo "################################################################"
 echo "downloading Oh-My-Zsh from github"
@@ -296,8 +302,22 @@ neofetch
 
 # these come always last
 
-package="hardcode-fixer-git"
-aurinstall
+###############################################################################
+
+category Last
+
+list=(
+hardcode-fixer-git
+)
+
+count=0
+for name in "${list[@]}" ; do
+	count=$[count+1]
+	tput setaf 3;echo "Installing package nr.  "$count " " $name;tput sgr0;
+	aurinstall $name
+done
+
+###############################################################################
 
 sudo hardcode-fixer
 
