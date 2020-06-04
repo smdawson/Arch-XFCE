@@ -1,55 +1,68 @@
-#!/bin/bash
+##!/bin/bash
 #set -e
-##################################################################################################################
-# Credit	:	Erik Dubois
-# We# Website	:	https://www.arcolinux.info
-# Website	:	https://www.arcolinux.com
-# Website	:	https://www.arcolinuxd.com
-# Website	:	https://www.arcolinuxb.com
-# Website	:	https://www.arcolinuxiso.com
-# Website	:	https://www.arcolinuxforum.combsite	:	https://www.erikdubois.be
-# 
-# Edit by	:	Seth Dawson
-##################################################################################################################
 #
-#   DO NOT JUST RUN THIS. EXAMINE AND JUDGE. RUN AT YOUR OWN RISK.
+##########################################################
+#                                                        #
+#                 Arch-XFCE script                       #
+#  ArchLinux Applications Automatic Installation Script  #
+#  Inspired and Forked From                              #
+#  https://github.com/SofianeHamlaoui/ArchI0             #
+#  And                                                   #
+#  https://github.com/arcolinuxd/arco-xfce               #
+##########################################################
+#  +FIRST  : sudo chmod +x arch-xfce.sh                  #
+#                (Give EXEC Access To Script)            #
+#  +TO RUN    : ./arch-xfce.sh                           #
+##########################################################
+#                                                        #
+#                DO NOT JUST RUN THIS.                   #
+#       EXAMINE AND JUDGE. RUN AT YOUR OWN RISK.         #
+#                                                        #
+##########################################################
 #
-##################################################################################################################
-echo "##################################################"
-echo "#                                                #"
-echo "#     Installing Display Manager and Desktop     #"
-echo "#                                                #"
-echo "##################################################"
+#
+#  TO DO:
+#
+#
+######################## Variables #######################
+#
+# b=bold u=underline bl=black r=red g=green
+# y=yellow bu=blue m=magenta c=cyan w=white
+# endc=end-color enda=end-argument
+b='\033[1m'
+u='\033[4m'
+bl='\E[30m'
+r='\E[31m'
+g='\E[32m'
+y='\E[33m'
+bu='\E[34m'
+m='\E[35m'
+c='\E[36m'
+w='\E[37m'
+endc='\E[0m'
+enda='\033[0m'
+version="20200603"
 
-###############################################################################
-#
-#   DECLARATION OF FUNCTIONS
-#
-###############################################################################
+####################### Functions ########################
 
-
-func_install() {
-	if pacman -Qi $1 &> /dev/null; then
-		tput setaf 2
-  		echo "###############################################################################"
-  		echo "################## The package "$1" is already installed"
-      	echo "###############################################################################"
-      	echo
-		tput sgr0
-	else
-    	tput setaf 3
-    	echo "###############################################################################"
-    	echo "##################  Installing package "  $1
-    	echo "###############################################################################"
-    	echo
-    	tput sgr0
-    	sudo pacman -S --noconfirm --needed $1
+function install {
+  # Check If Package Is Installed
+  if pacman -Qi $1 &> /dev/null; then
+      echo -e " [${g}✔${endc}]::[${b}"$1"${enda}] Is Already Installed!"
+  else
+      sudo pacman -S --noconfirm --needed $1
+      # Verify Successful Installation
+    if pacman -Qi $package &> /dev/null; then
+      echo -e " [${g}✔${endc}]::[${b}"$1"${enda}]: Installed!"
+    else
+      echo -e " [${r}!${endc}]::[${b}"$1"${enda}]: ${r}NOT Installed!${endc}"
     fi
+  fi
 }
 
-###############################################################################
-echo "Installation of the core software"
-###############################################################################
+echo
+echo -e " [${g}✔${endc}]::[${g}${b}Installation Of Core Software${enda}${endc}]"
+echo
 
 list=(
 lightdm
@@ -63,38 +76,32 @@ xfce4-goodies
 count=0
 
 for name in "${list[@]}" ; do
-	count=$[count+1]
-	tput setaf 3;echo "Installing package nr.  "$count " " $name;tput sgr0;
-	func_install $name
+  count=$[count+1]
+  echo -e " ${y}Installing package # "$count" ${b}["$name"]${enda} ${endc}" ;
+  install $name
 done
 
 ###############################################################################
 
-tput setaf 6;echo "################################################################"
-echo "Copying all files and folders from /etc/skel to ~"
-echo "################################################################"
-echo;tput sgr0
-cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H.%M.%S) && cp -rf /etc/skel/* ~
+echo
+echo -e " [${g}✔${endc}]::[${g}${b}Copying all files and folders from /etc/skel to ~${enda}${endc}]"
+echo
+cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H.%M.%S) && cp -rT /etc/skel ~
 
-tput setaf 5;echo "################################################################"
-echo "Enabling lightdm as display manager"
-echo "################################################################"
-echo;tput sgr0
-sudo systemctl enable lightdm.service -f
+echo
+echo -e " [${g}✔${endc}]::[${g}${b}Enabling lightdm Display Manager${enda}${endc}]"
+echo
+#sudo systemctl enable lightdm.service -f
 
-tput setaf 2;echo "################################################################"
-echo "Removing packages not needed"
-echo "################################################################"
-echo;tput sgr0
+echo
+echo -e " [${r}!${endc}]::[${r}${b}Removing Packages Not Needed${enda}${endc}]"
+echo
 sudo pacman -R xfce4-artwork xfce4-screensaver --noconfirm
 
-tput setaf 7;echo "################################################################"
-echo "A very minimal functional desktop is now installed"
-echo "################################################################"
-echo;tput sgr0
-
-tput setaf 11;
-echo "################################################################"
-echo "Reboot your system"
-echo "################################################################"
-echo;tput sgr0
+echo
+echo -e " [${g}✔${endc}]::[${g}${b}A Minimal Functional Desktop Is Now Installed${enda}${endc}]"
+echo
+echo -e " ${bu}SMD-Arch Installation Script Version${b} $version ${enda} ${endc}"
+echo
+echo -e " [${r}!${endc}]::[${b}${r}REBOOT YOUR SYSTEM${endc}${enda}]::[${r}!${endc}]"
+echo
