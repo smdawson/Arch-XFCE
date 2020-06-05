@@ -321,6 +321,6 @@ done
 
 sudo hardcode-fixer
 
-echo "################################################################"
-echo "####        Software from AUR Repository installed        ######"
-echo "################################################################"
+echo -e " [${g}✔${endc}]::Software From ${b}${r}[Arch User Repository]${endc}${enda} Installed"
+echo
+echo -e " ${bu}SMD-Arch Installation Script Version${b} $version ${enda} ${endc}"

@@ -3,7 +3,7 @@
 #
 ##########################################################
 #                                                        #
-#                 Arch-XFCE script                       #
+#               SMD-Arch-XFCE script                     #
 #  ArchLinux Applications Automatic Installation Script  #
 #  Inspired and Forked From                              #
 #  https://github.com/SofianeHamlaoui/ArchI0             #
