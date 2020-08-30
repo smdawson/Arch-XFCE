@@ -264,6 +264,7 @@ category System
 list=(
 arc-gtk-theme
 accountsservice
+arduino
 baobab
 curl
 dconf-editor

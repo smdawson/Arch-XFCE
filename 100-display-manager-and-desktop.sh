@@ -91,7 +91,7 @@ cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H.%M.%S) && cp -rT /etc/skel
 echo
 echo -e " [${g}✔${endc}]::[${g}${b}Enabling lightdm Display Manager${enda}${endc}]"
 echo
-#sudo systemctl enable lightdm.service -f
+sudo systemctl enable lightdm.service -f
 
 echo
 echo -e " [${r}!${endc}]::[${r}${b}Removing Packages Not Needed${enda}${endc}]"
