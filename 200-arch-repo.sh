@@ -168,11 +168,14 @@ end_category Games
 category Graphics
 
 list=(
+cura	
 gimp
 gnome-font-viewer
 gpick
 inkscape
 nomacs
+openscad
+prusa-slicer
 ristretto
 )
 
