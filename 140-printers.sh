@@ -100,7 +100,7 @@ echo
 echo -e " [${g}✔${endc}]::Enabling Services"
 echo
 
-sudo systemctl enable org.cups.cupsd.service
+sudo systemctl enable cups.service
 
 ###############################################################################
 
